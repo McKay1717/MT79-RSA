@@ -12,7 +12,7 @@ RSpec.describe RSA do
     end
 
     it 'Return GCD, u and v' do
-      expect(RSA.euclide_etendu(120, 23)).to eq({ pgcd: 1, u: -9, v: 47 })
+      expect(RSA.euclide_etendu(120, 23)).to eq(pgcd: 1, u: -9, v: 47)
     end
 
     it 'Return modular inverse' do
@@ -23,6 +23,26 @@ RSpec.describe RSA do
     it 'Return c and d' do
       value = RSA.generation_exposants 53, 97
       expect(value).to eq(c: 5, d: 1997)
+    end
+
+    it 'Return crypted value' do
+      value = RSA.chiffrement 123, 221, 5
+      expect(value).to eq(106)
+    end
+
+    it 'Return uncrypted value' do
+      value = RSA.dechiffrement 106, 221, 1997
+      expect(value).to eq(123)
+    end
+
+    it 'Return String to Integer' do
+      value = RSA.string_to_integer "Bonsoir."
+      expect(value).to eq(26943298110)
+    end
+
+    it 'Return Integer to String' do
+      value = RSA.integer_to_string 26943298110
+      expect(value).to eq("Bonsoir.".upcase)
     end
   end
 end
