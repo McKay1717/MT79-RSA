@@ -5,15 +5,7 @@ require 'benchmark'
 require './lib/rsa.rb'
 require 'prime'
 
-n = 211582871
-
-p = n.prime_division[0][0]
-q = n.prime_division[1][0]
-
-phi = (p - 1) * (q - 1)
-
-c = 127
-
-d = RSA.inverse_modulaire(c, phi)
-
-puts RSA.integer_to_string RSA.dechiffrement(RSA.string_to_integer("LHRZNS"), n, d)
+puts RSA.decode "LHRZNS", 211582871, 127
+puts RSA.decode "AYMRNCI", 844991843, 349837
+puts RSA.decode "IVWTRM.FPL", 202899206548601, 39898535
+exit

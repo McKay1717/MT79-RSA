@@ -56,11 +56,11 @@ class RSA
   end
 
   def self.chiffrement(m, n, c)
-    (m.to_bn**c.to_bn) % n.to_bn
+    exponentiation_modulaire m, c, n
   end
 
   def self.dechiffrement(m, n, d)
-    (m.to_bn**d.to_bn) % n.to_bn
+    exponentiation_modulaire m, d, n
   end
 
   def self.string_to_integer(message)
@@ -84,5 +84,16 @@ class RSA
       message += ALPHABET[remainder]
     end
     (message + ALPHABET[quotient].to_s).reverse
+  end
+
+  def self.decode(message, n, c)
+    p = n.prime_division[0][0]
+    q = n.prime_division[1][0]
+
+    d = RSA.inverse_modulaire(c, (p - 1) * (q - 1))
+
+    message = RSA.string_to_integer message
+
+    RSA.integer_to_string RSA.dechiffrement message, n, d
   end
 end

@@ -60,7 +60,15 @@ cd &\equiv 1 \pmod{\varphi(n)}
 
 \subsection{Question 3}
 \subsubsection{Montrer que $M$ est premier avec $p$ et avec $q$}
-% JPP si tu veux continuer go on
+
+
+\subsection{Question 4}
+\subsubsection{Déduire que $M^{p-1} \equiv 1 \mod(p)$}
+
+\subsubsection{Déduire que $M^{q-1} \equiv 1 \mod(q)$}
+
+\subsection{Question 5}
+\subsubsection{Déduire que $M^{cd} - M$ est un multiple de n}
 
 \clearpage
 \section{Premier exemple}
@@ -168,18 +176,18 @@ Enfin, on retourne un $Hash$ contenant la valeur de $c$ et de $d$ tel que $d = i
 \clearpage
 \subsection{Question 5}
 \subsubsection{Implémenter \textit{chiffrement(m, n, c)}}
-On sait d'après l'énoncé que $m_2 \equiv m^c \mod(n)$. L'algorithme renvoie donc cette valeur\\
+On sait d'après l'énoncé que $m_2 \equiv m^c \mod(n)$. L'algorithme renvoie donc cette valeur, qui est l'exponentiation modulaire.\\
 \begin{lstlisting}[language=Ruby]
   def self.chiffrement(m, n, c)
-    (m ** c) % n
+    exponentiation_modulaire m, c, n
   end
 \end{lstlisting}
 
 \subsubsection{Implémenter \textit{dechiffrement(m, n, d)}}
-On sait d'après l'énoncé que $m \equiv m_2^c \mod(n)$. L'algorithme renvoie donc cette valeur\\
+On sait d'après l'énoncé que $m \equiv m_2^c \mod(n)$. L'algorithme renvoie donc cette valeur, qui est l'exponentiation modulaire.\\
 \begin{lstlisting}[language=Ruby]
   def self.dechiffrement(m, n, d)
-    (m ** d) % n
+    exponentiation_modulaire m, d, n
   end
 \end{lstlisting}
 
@@ -191,7 +199,7 @@ On sait d'après l'énoncé que $m \equiv m_2^c \mod(n)$. L'algorithme renvoie d
 
 \clearpage
 \subsection{A vous de jouer}
-\subsubsection{Ré-implémentation de la fonction \textit{StringToInteger} en Ruby}
+\subsubsection{Ré-implémentation de la méthode \textit{StringToInteger} en Ruby}
 \begin{lstlisting}[language=Ruby]
   def self.string_to_integer(message)
     message = message.upcase.split(//)
@@ -203,12 +211,13 @@ On sait d'après l'énoncé que $m \equiv m_2^c \mod(n)$. L'algorithme renvoie d
     value
   end
 \end{lstlisting}
-La méthode est une copie de celui fourni en Java, l'alphabet est lui aussi repris à l'identique.\\
+La méthode est une copie de celle fournie en Java, l'alphabet est lui aussi repris à l'identique.\\
 \begin{lstlisting}[language=Ruby]
   ALPHABET = %w(. A B C D E F G H I J K L M N O P Q R S T U V W X Y Z).freeze
 \end{lstlisting}
+\bigskip
 
-\subsubsection{Ré-implémentation de la fonction \textit{IntegerToString} en Ruby}
+\subsubsection{Ré-implémentation de la méthode \textit{IntegerToString} en Ruby}
 \begin{lstlisting}[language=Ruby]
   def self.integer_to_string(number)
     quotient = number / ALPHABET.length
@@ -224,6 +233,39 @@ La méthode est une copie de celui fourni en Java, l'alphabet est lui aussi repr
     (message + ALPHABET[quotient]).reverse
   end
 \end{lstlisting}
-La méthode est une copie de celui fourni en Java.\\
+La méthode est une copie de celle fournie en Java.\\
 Exception faite que l'on construit le mot à l'envers, et qu'il est donc inversé avant d'être renvoyé. 
+
+\clearpage
+\subsubsection{Implémentation de la méthode \textit{Decodage(message, n, c)}}
+\begin{lstlisting}[language=Ruby]
+  def self.decode(message, n, c)
+    p = n.prime_division[0][0]
+    q = n.prime_division[1][0]
+
+    d = RSA.inverse_modulaire(c, (p - 1) * (q - 1))
+
+    message = RSA.string_to_integer message
+
+    RSA.integer_to_string RSA.dechiffrement message, n, d
+  end
+\end{lstlisting}
+On commence par déterminer $p$ et $q$, pour cela on utilise la méthode $prime\_division$ qui renvoie les facteurs premiers d'un nombre donné.\\
+On peut ainsi calculer $\varphi(n)$ et donc déterminer $d$ en utilisant la méthode $inverse\_modulaire(c, \varphi(n))$.\\
+Il ne reste plus qu'a déchiffrer le message, en utilisant la fonction $dechiffrement(message, n, d)$
+
+\subsubsection{Déchiffrer les valeurs données}
+On execute notre méthode $decode(message, n, c)$ avec les valeurs fournies.
+\begin{lstlisting}[language=Ruby]
+puts RSA.decode "LHRZNS", 211582871, 127		# => "RETI"
+puts RSA.decode "AYMRNCI", 844991843, 349837		# => "RUIZ"
+puts RSA.decode "IVWTRM.FPL", 202899206548601, 39898535	# => "SICILIENNE"
+\end{lstlisting}
+Les valeurs trouvées correspondent bien a des ouvertures d'échecs.
+
+\clearpage
+\section{Pour aller plus loin}
+\subsection{Utilisation de RSA en pratique}
+\subsection{Générer et vérifier de grands nombres premiers}
+\subsection{Algorithme de Shor et fiabilité et sécurité de RSA}
 \end{document}
