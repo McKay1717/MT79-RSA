@@ -44,5 +44,10 @@ RSpec.describe RSA do
       value = RSA.integer_to_string 26943298110
       expect(value).to eq("Bonsoir.".upcase)
     end
+
+    it 'Return decoded message' do
+      value = RSA.decode "LHRZNS", 211582871, 127
+      expect(value).to eq("RETI")
+    end
   end
 end
