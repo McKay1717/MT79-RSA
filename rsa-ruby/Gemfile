@@ -1,7 +1,7 @@
 source 'https://rubygems.org' do
-  gem 'progress_bar'
+  # Test gem
   gem 'rspec'
-  gem 'ruby-prof'
+  gem 'simplecov'
 
   # Debug gem
   gem 'byebug'
