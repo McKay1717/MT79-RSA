@@ -79,6 +79,7 @@ n_1 &= 43279361
 \varphi(n_1) &= 43266132
 \end{align*}
 
+% Alors là, j'en avais marre. Du coup c'est pas raisonnement mathématique
 \subsection{Question 2}
 \subsubsection{Choisir un entier $c_1$ premier avec $\varphi(n_1)$ tel que $c_1 < \varphi(n_1)$}
 On sait que 2 nombres sont premiers entre eux si leur $PGCD$ est égal à 1\\
@@ -163,4 +164,66 @@ Enfin, on retourne un $Hash$ contenant la valeur de $c$ et de $d$ tel que $d = i
     {c: c, d: inverse_modulaire(c, phi)}
   end
 \end{lstlisting}
+
+\clearpage
+\subsection{Question 5}
+\subsubsection{Implémenter \textit{chiffrement(m, n, c)}}
+On sait d'après l'énoncé que $m_2 \equiv m^c \mod(n)$. L'algorithme renvoie donc cette valeur\\
+\begin{lstlisting}[language=Ruby]
+  def self.chiffrement(m, n, c)
+    (m ** c) % n
+  end
+\end{lstlisting}
+
+\subsubsection{Implémenter \textit{dechiffrement(m, n, d)}}
+On sait d'après l'énoncé que $m \equiv m_2^c \mod(n)$. L'algorithme renvoie donc cette valeur\\
+\begin{lstlisting}[language=Ruby]
+  def self.dechiffrement(m, n, d)
+    (m ** d) % n
+  end
+\end{lstlisting}
+
+\clearpage
+\section{Chiffrement de messages textes}
+\subsection{Un mot, un nombre}
+\subsubsection{Méthode \textit{StringToInteger}}
+\subsubsection{Méthode \textit{IntegerToString}}
+
+\clearpage
+\subsection{A vous de jouer}
+\subsubsection{Ré-implémentation de la fonction \textit{StringToInteger} en Ruby}
+\begin{lstlisting}[language=Ruby]
+  def self.string_to_integer(message)
+    message = message.upcase.split(//)
+    value = 0
+
+    message.each_with_index do |char, i|
+      value = value + (ALPHABET.length ** (message.length - 1 - i)) * ALPHABET.index(char)
+    end
+    value
+  end
+\end{lstlisting}
+La méthode est une copie de celui fourni en Java, l'alphabet est lui aussi repris à l'identique.\\
+\begin{lstlisting}[language=Ruby]
+  ALPHABET = %w(. A B C D E F G H I J K L M N O P Q R S T U V W X Y Z).freeze
+\end{lstlisting}
+
+\subsubsection{Ré-implémentation de la fonction \textit{IntegerToString} en Ruby}
+\begin{lstlisting}[language=Ruby]
+  def self.integer_to_string(number)
+    quotient = number / ALPHABET.length
+    remainder = number % ALPHABET.length
+    message = "#{ALPHABET[remainder]}"
+
+    while quotient > ALPHABET.length
+      remainder = quotient % ALPHABET.length
+      quotient = quotient / ALPHABET.length
+      message += ALPHABET[remainder]
+    end
+    
+    (message + ALPHABET[quotient]).reverse
+  end
+\end{lstlisting}
+La méthode est une copie de celui fourni en Java.\\
+Exception faite que l'on construit le mot à l'envers, et qu'il est donc inversé avant d'être renvoyé. 
 \end{document}
