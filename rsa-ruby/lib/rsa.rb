@@ -9,11 +9,10 @@ class RSA
   # Which is O(log(n))
   def self.exponentiation_modulaire(x, k, n)
     result = 1
-    base   = x
     while k > 0
-      result = (result * base) % n if (k & 1) == 1
+      result = (result * x) % n if (k & 1) == 1
       k    = k >> 1
-      base = (base**2) % n
+      x = (x**2) % n
     end
     result
   end
@@ -69,7 +68,7 @@ class RSA
     value = 0
 
     message.each_with_index do |char, i|
-      value = value + (ALPHABET.length ** (message.length - 1 - i)) * ALPHABET.index(char)
+      value += (ALPHABET.length ** (message.length - 1 - i)) * ALPHABET.index(char)
     end
     value
   end

@@ -109,20 +109,21 @@ n_1 &= 43279361
 \varphi(n_1) &= 43266132
 \end{align*}
 
-% Alors là, j'en avais marre. Du coup c'est pas raisonnement mathématique
 \subsection{Question 2}
 \subsubsection{Choisir un entier $c_1$ premier avec $\varphi(n_1)$ tel que $c_1 < \varphi(n_1)$}
 On sait que 2 nombres sont premiers entre eux si leur $PGCD$ est égal à 1\\
-Pour déterminer rapidement ce chiffre, on utilise un algorithme simple, ici en Ruby.\\
-\begin{lstlisting}[language=Ruby]
-(2..43266131).each do |i|
-	if p.gcd(i) == 1
-		puts i
-		break
-	end
-end
-\end{lstlisting}
-L'algorithme itère simplement sur les entiers entre 2 et $\varphi(n_1)$ et retourne le plus petit entier pour lequel $PGCD(\varphi(n_1), i) = 1$ soit $c_1 = 5$.
+On pose donc $c_1 = 5$
+\begin{align*}
+\text{Par la Méthode d'Euclide}&\\
+43266132 &= 8653226*5 + 2\\
+5 &= 2*2 + 1\\
+2 &= 2*1 + 0
+\end{align*}
+Le PGCD est égal au dernier reste non nul soit 1.\\ 
+Le PGCD étant égal à 1, $c_1 = 5$ et $\varphi(n_1) = 43266132$ sont premiers entre eux et $c_1 < \varphi(n_1)$.
+
+\subsection{Question 3}
+\subsubsection{Déterminer $d_1$ inverse modulaire de $c_1$ modulo $\varphi(n_1)$}
 
 \clearpage
 \section{Fonctions de base}
@@ -134,13 +135,10 @@ L'algorithme implémenté suit le pseudo-code suivant :\\
 \begin{lstlisting}[language=Ruby]
   def self.exponentiation_modulaire(x, k, n)
     result = 1
-    base   = x
     while k > 0
-      if (k & 1) == 1
-        result = (result * base) % n
-      end
+      result = (result * x) % n if (k & 1) == 1
       k    = k >> 1
-      base = (base * base) % n
+      x = (x**2) % n
     end
     result
   end
