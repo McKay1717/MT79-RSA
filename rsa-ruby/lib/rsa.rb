@@ -3,7 +3,7 @@ require 'openssl'
 require 'prime'
 
 class RSA
-  ALPHABET = %w(. A B C D E F G H I J K L M N O P Q R S T U V W X Y Z).freeze
+  ALPHABET = %w[. A B C D E F G H I J K L M N O P Q R S T U V W X Y Z].freeze
 
   # Implemented following this algorithm : https://en.wikipedia.org/wiki/Modular_exponentiation#Right-to-left_binary_method
   # Which is O(log(n))
@@ -11,24 +11,24 @@ class RSA
     result = 1
     while k > 0
       result = (result * x) % n if (k & 1) == 1
-      k    = k >> 1
-      x = (x**2) % n
+      k      = k >> 1
+      x      = (x**2) % n
     end
     result
   end
 
   # Implemented following : https://fr.wikipedia.org/wiki/Algorithme_d%27Euclide_%C3%A9tendu#L'algorithme
   def self.euclide_etendu(a, b)
-    r = a
-    u = 1
-    v = 0
+    r  = a
+    u  = 1
+    v  = 0
     r2 = b
     u2 = 0
     v2 = 1
-    q = 0
+    q  = 0
 
     while r2 > 0
-      q = r / r2
+      q                   = r / r2
       r, u, v, r2, u2, v2 = r2, u2, v2, r - q * r2, u - q * u2, v - q * v2
     end
 
@@ -44,7 +44,7 @@ class RSA
 
   def self.generation_exposants(p, q)
     phi = (p - 1) * (q - 1)
-    c = 2
+    c   = 2
 
     while c < phi
       break if c.gcd(phi) == 1
@@ -65,22 +65,22 @@ class RSA
 
   def self.string_to_integer(message)
     message = message.upcase.split(//)
-    value = 0
+    value   = 0
 
     message.each_with_index do |char, i|
-      value += (ALPHABET.length ** (message.length - 1 - i)) * ALPHABET.index(char)
+      value += (ALPHABET.length**(message.length - 1 - i)) * ALPHABET.index(char)
     end
     value
   end
 
   def self.integer_to_string(number)
-    quotient = number / ALPHABET.length
+    quotient  = number / ALPHABET.length
     remainder = number % ALPHABET.length
-    message = "#{ALPHABET[remainder]}"
+    message   = (ALPHABET[remainder]).to_s
 
     while quotient > ALPHABET.length
       remainder = quotient % ALPHABET.length
-      quotient = quotient / ALPHABET.length
+      quotient /= ALPHABET.length
       message += ALPHABET[remainder]
     end
     (message + ALPHABET[quotient].to_s).reverse

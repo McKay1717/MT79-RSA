@@ -36,18 +36,18 @@ RSpec.describe RSA do
     end
 
     it 'Return String to Integer' do
-      value = RSA.string_to_integer "Bonsoir."
-      expect(value).to eq(26943298110)
+      value = RSA.string_to_integer 'Bonsoir.'
+      expect(value).to eq(26_943_298_110)
     end
 
     it 'Return Integer to String' do
-      value = RSA.integer_to_string 26943298110
-      expect(value).to eq("Bonsoir.".upcase)
+      value = RSA.integer_to_string 26_943_298_110
+      expect(value).to eq('Bonsoir.'.upcase)
     end
 
     it 'Return decoded message' do
-      value = RSA.decode "LHRZNS", 211582871, 127
-      expect(value).to eq("RETI")
+      value = RSA.decode 'LHRZNS', 211_582_871, 127
+      expect(value).to eq('RETI')
     end
   end
 end

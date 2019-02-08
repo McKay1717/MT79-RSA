@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3800d394-0abc-4890-815b-d72920b77b32" name="Default Changelist" comment="Implement more methods :sparkles:, Implement tests :rotating_light: and an attempt to decypher :hankey:">
-      <change beforePath="$PROJECT_DIR$/../rapport/mt79-rsa.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../rapport/mt79-rsa.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rapport/mt79-rsa.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../rapport/mt79-rsa.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/rsa-ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rsa-ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/rsa.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/rsa.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/rsa.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="94" column="23" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="23" />
+            <state relative-caret-position="271">
+              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -76,8 +72,8 @@
         <option value="$PROJECT_DIR$/spec/spec_helper.rb" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/README.MD" />
-        <option value="$PROJECT_DIR$/lib/rsa.rb" />
         <option value="$PROJECT_DIR$/spec/lib/rsa_spec.rb" />
+        <option value="$PROJECT_DIR$/lib/rsa.rb" />
       </list>
     </option>
   </component>
@@ -148,7 +144,7 @@
       <workItem from="1549368212897" duration="2026000" />
       <workItem from="1549398132007" duration="12952000" />
       <workItem from="1549544257076" duration="829000" />
-      <workItem from="1549612819517" duration="3584000" />
+      <workItem from="1549612819517" duration="3771000" />
     </task>
     <task id="LOCAL-00001" summary="Fix .gitignore and update report :wrench:">
       <created>1549485470656</created>
@@ -168,10 +164,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20633000" />
+    <option name="totallyTimeSpent" value="20820000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26752505" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -291,8 +288,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/rsa.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="94" column="23" selection-start-line="94" selection-start-column="23" selection-end-line="94" selection-end-column="23" />
+        <state relative-caret-position="271">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
         </state>
       </provider>
     </entry>
