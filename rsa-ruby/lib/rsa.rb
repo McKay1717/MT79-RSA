@@ -35,6 +35,7 @@ class RSA
     { pgcd: r, u: u, v: v }
   end
 
+  # Use `euclide_etendu` to find value
   def self.inverse_modulaire(a, n)
     val = euclide_etendu a, n
     raise Exception, "Can't find value for a: #{a} and n: #{n}" unless val[:pgcd] == 1
@@ -87,8 +88,9 @@ class RSA
   end
 
   def self.decode(message, n, c)
-    p = n.prime_division[0][0]
-    q = n.prime_division[1][0]
+    prime_div = n.prime_division
+    p = prime_div[0][0]
+    q = prime_div[1][0]
 
     d = RSA.inverse_modulaire(c, (p - 1) * (q - 1))
 
