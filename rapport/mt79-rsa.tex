@@ -64,12 +64,34 @@ cd &\equiv 1 \pmod{\varphi(n)}
 
 \subsection{Question 4}
 \subsubsection{Déduire que $M^{p-1} \equiv 1 \mod(p)$}
+Notons que $p$ est un nombre premier.
+D'après le théorème de Fermat, Si $M$ n’est pas divisible par $p$ alors $M^{p-1} \equiv 1 \mod(p)$.\\
+Or $M$ et $p$ sont premier entre eux.
+Donc le théorème de Fermat s'applique et $M^{p-1} \equiv 1 \mod(p)$
 
 \subsubsection{Déduire que $M^{q-1} \equiv 1 \mod(q)$}
+Notons que $pq$ est un nombre premier.
+D'après le théorème de Fermat, Si $M$ n’est pas divisible par $p$ alors $M^{q-1} \equiv 1 \mod(p)$.\\
+Or $M$ et $q$ sont premier entre eux.
+Donc le théorème de Fermat s'applique et $M^{q-1} \equiv 1 \mod(p)$
 
 \subsection{Question 5}
+\subsubsection{Déduire que $M^{cd}\equiv M \mod(p)$}
+Rappelons que :
+\begin{equation}
+	cd = 1+k(p-1)(q-1)
+\end{equation}
+En appliquant cela à M :\\
+\begin{equation}
+ M^{cd}=M^{1+k(p-1)(q-1)}=M*(M^{p-1})^{k(q-1)}\equiv M \mod(p)
+\end{equation}
+Donc $p$ divise $M^{cd}-M$
+\subsubsection{Déduire que $M^{cd}\equiv M \mod(q)$}
+De même que pour$M^{cd}\equiv M \mod(p)$, $M^{cd}\equiv M \mod(q)$ c'est à dire que que $q$ divise $M^{cd}-M$ 
+\subsection{Question 6}
 \subsubsection{Déduire que $M^{cd} - M$ est un multiple de n}
-
+$p$ et $q$ sont premier entre eux, $pq=n$ divise $M^{cd} - M$.\\
+Donc $M^{cd}\equiv M \mod(n)$
 \clearpage
 \section{Premier exemple}
 \subsection{Question 1}
