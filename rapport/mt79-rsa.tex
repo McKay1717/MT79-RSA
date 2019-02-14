@@ -261,8 +261,9 @@ Exception faite que l'on construit le mot à l'envers, et qu'il est donc invers�
 \subsubsection{Implémentation de la méthode \textit{Decodage(message, n, c)}}
 \begin{lstlisting}[language=Ruby]
   def self.decode(message, n, c)
-    p = n.prime_division[0][0]
-    q = n.prime_division[1][0]
+    prime_div = n.prime_division
+    p = prime_div[0][0]
+    q = prime_div[1][0]
 
     d = RSA.inverse_modulaire(c, (p - 1) * (q - 1))
 
